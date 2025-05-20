@@ -1,66 +1,117 @@
-# AI Tabanlı Çoklu Algılama Sistemi
+AI TABANLI ÇOKLU ALGILAMA SİSTEMİ
 
-Bu projede, **YOLOv8**, **MediaPipe**, **OpenCV** ve bazı matematiksel fonksiyonlar kullanarak gerçek zamanlı olarak birden fazla insan davranışı ve nesnesi algılayan bir yapay zeka sistemi geliştirdik.
+Proje Adı: Karma Kullanımlı Nesne Tanıma
 
-##  Projenin Amacı
+Bu proje, YOLOv8, MediaPipe ve OpenCV kullanarak gerçek zamanlı olarak yüz ifadeleri, göz kırpma, el/parmak hareketleri ve çevresel nesneleri algılayan bir yapay zeka sistemidir. Kamera görüntüsünden alınan verilerle insan davranışları ve çevre analiz edilerek görselleştirilir.
 
-Gerçek zamanlı bir kamera görüntüsü üzerinden:
-- Nesne tespiti (YOLOv8 ile)
-- Yüz tespiti
-- Göz kırpma sayacı
-- El tespiti ve parmak sayma
-- Yüz ifadesi analizi (mutlu, somurtkan, normal)
+Projenin Amacı:
+Görüntü işleme ve yapay zeka teknolojilerini birleştirerek insan-makine etkileşimini iyileştirmeyi hedefler. Sistem şunları sağlar:
+Yüz ifadesi analizi (mutlu, somurtma, normal)
+Göz kırpma takibi
+El/parmak hareketi tespiti
+Ortamdaki nesnelerin (insan, araç vs.) tespiti
 
-özelliklerini aynı anda çalıştırabilen çok yönlü bir sistem inşa ettik.
+Kullanım Alanları:
+Erişilebilirlik uygulamaları
+Sürücü yorgunluk tespiti
+Yapay zeka eğitimi
+Artırılmış gerçeklik sistemleri
 
----
+Hedef Kullanıcılar:
+Yapay zeka ve görüntü işleme geliştiricileri
+Akademisyenler, öğrenciler
+Endüstriyel sistem geliştiricileri
+Erişilebilirlik çözümü üreticileri
+Hobi amaçlı geliştiriciler
 
-##  Kullanılan Teknolojiler
+Kullanılan Teknolojiler:
+Python 3.8 ve üzeri
+OpenCV 4.5+
+MediaPipe
+YOLOv8
+NumPy
+Math ve Time kütüphaneleri
 
-- **Python 3.x**
-- **OpenCV** - Görüntü işleme
-- **MediaPipe** - Yüz, el ve mesh tespiti
-- **Ultralytics YOLOv8** - Nesne algılama
-- **Math** - Mesafe ve oran hesaplamaları
+Kurulum Adımları:
 
----
+Python 3.8+ yüklü olmalı (https://www.python.org/downloads/)
+Terminalden aşağıdaki komutları çalıştırın:
+pip install opencv-python
+pip install mediapipe
+pip install ultralytics
+pip install numpy
 
-##  Bileşenler ve Açıklamalar
+3.YOLOv8 modeli otomatik olarak indirilir (yolov8n.pt)
 
-###  Göz Kırpma Takibi
-- Gözlerin alt ve üst noktaları arasındaki mesafeyi ölçerek göz kırpma tespit ettik.
-- Belirli bir eşik değerinin altına düşerse göz kapalı sayıldı.
-- Her kapanış, göz kırpma olarak sayıldı.
+4.(Opsiyonel) QR kod oluşturmak için:
+pip install qrcode pillow
 
-###  Parmak Sayma
-- El landmarks (eklem) noktalarını analiz ettik.
-- Baş parmak sağa veya sola bakma yönüne göre değerlendirildi.
-- Diğer parmaklar, uç noktalarının alt boğumlarına göre yukarıda mı aşağıda mı olduğu kontrol edilerek sayıldı.
+Kod:
 
-###  Yüz İfadesi Analizi
-- Ağız üst ve alt noktaları ile sağ ve sol köşe noktaları arasındaki oranı hesapladık.
-- Bu oranlara göre:
-  - `> 0.25`: Mutlu
-  - `< 0.05`: Somurtkan
-  - Arası: Normal
+"""
 
-###  Nesne Tespiti (YOLOv8)
-- `yolov8n.pt` modeliyle canlı görüntüdeki nesneleri sınıflandırdık.
-- Tespit edilen nesnelere kutu çizip isim ve doğruluk yüzdesini yazdırdık.
+import qrcode
 
----
+qr = qrcode.QRCode(...)
 
-##  Canlı Görüntü Üzerinde Gösterilen Bilgiler
+qr.add_data("https://github.com/furkanakkus55/NesneTanima-Opencv")
+...
 
-- FPS (saniyedeki kare sayısı)
-- Göz kırpma sayısı
-- Parmak sayısı
-- Yüz ifadesi (mutlu / somurtkan / normal)
-- Tespit edilen nesneler
+img.save("outputs/qr_code.png") 
 
----
+"""
 
-##  Kurulum
+Donanım Gereksinimleri:
+Web kamerası
 
-```bash
-pip install opencv-python mediapipe ultralytics
+En az 8 GB RAM
+
+Modern CPU (tercihen GPU)
+
+Windows, Linux veya macOS işletim sistemi
+
+Projeyi Çalıştırmak İçin:
+git clone https://github.com/furkanakkus55/NesneTanima-Opencv
+
+cd NesneTanima-Opencv
+python main.py 
+
+Program Başladığında:
+Yüz algılanır ve gösterilir
+Göz kırpma sayısı güncellenir
+Yüz ifadesi tespit edilir
+Parmak sayısı analiz edilir
+Nesneler (insan, araç vs.) ekranda gösterilir
+FPS ve analiz bilgileri sağ üst köşede görünür
+Çıkmak için 'q' tuşuna basmanız yeterlidir.
+
+Proje Dosya Yapısı:
+
+css
+Kopyala
+Düzenle
+face-object-detection/
+├── main.py
+
+├── README.md
+
+├── poster.pdf
+
+├── outputs/
+
+│   ├── ornek_cikti.png
+
+│   └── qr_code.png
+
+
+Geliştiriciler:
+
+Furkan Akkuş – 2405902021 – Yapay Zeka Operatörlüğü / BTMYO
+
+Yiğit Bayram – 2405902030 – Yapay Zeka Operatörlüğü / BTMYO
+
+GitHub Proje Linki:
+https://github.com/furkanakkus55/NesneTanima-Opencv
+
+
+
